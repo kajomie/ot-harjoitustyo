@@ -2,6 +2,7 @@
 
 Kurssin **Aineopintojen harjoitustyö: _Ohjelmistotekniikka_** tehtäviä.  
 
+### Tehtäviä  
 #### Viikko 1
 
 [komentorivi.txt](https://github.com/kajomie/ot-harjoitustyo/blob/main/laskarit/viikko1/komentorivi.txt)  
