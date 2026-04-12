@@ -6,8 +6,8 @@ Muistikorttisovellus, jossa käyttäjä voi tehdä muistikortteja (_flashcard_),
 Peruskäyttäjä.  
 
 ## Perustoiminnallisuus  
-- Käyttäjä voi tehdä uuden tunnuksen.
-- Käyttäjä voi kirjautua sisään tunnuksellaan.
+- Käyttäjä voi tehdä uuden tunnuksen. (TEHTY)
+- Käyttäjä voi kirjautua sisään tunnuksellaan. (TEHTY)
 - Jos kirjautuminen epäonnistuu, sivu ilmoittaa siitä. Muuten käyttäjälle ilmoitetaan kirjautumisen onnistuneen ja ohjataan käyttäjä etusivulle.
 ### Sisäänkirjautumisen jälkeen  
 - Käyttäjä voi luoda omia muistikortteja.

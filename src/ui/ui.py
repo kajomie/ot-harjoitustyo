@@ -1,38 +1,49 @@
 from tkinter import Tk, ttk, constants
 import tkinter as tk
+from ui.login_view import LoginView
+from ui.register_view import RegisterView
+from ui.front_page_view import FrontPageView
 
 class UI:
     def __init__(self, root):
         self._root = root
+        self._current_view = None
 
     def start(self):
-        header = tk.Frame(self._root, background="#32567a", height=150)
-        footer = tk.Frame(self._root, background="#32567a", height=150)
-        main = tk.Frame(self._root, background="#e7eef5")
+        self._show_register_view()
 
-        header.pack(side="top", fill="x")
-        footer.pack(side="bottom", fill="x")
-        main.pack(side="top", fill="both", expand=True)
-        
-        register_frame = tk.Frame(master=main, width=500, height=500, background="#e7eef5")
-        register_frame.pack(padx=50, pady=50)
+    def _hide_current_view(self):
+        if self._current_view:
+            self._current_view.destroy()
 
-        username_text = ttk.Label(master=register_frame, text="Käyttäjänimi", background="#e7eef5")
-        username_field = ttk.Entry(master=register_frame)
+        self._current_view = None
 
-        password_text = ttk.Label(master=register_frame, text="Salasana", background="#e7eef5")
-        password_field = ttk.Entry(master=register_frame)
+    def _show_register_view(self):
+        self._hide_current_view()
 
-        confirm_password_text = ttk.Label(master=register_frame, text="Salasana uudestaan", background="#e7eef5")
-        confirm_password_field = ttk.Entry(master=register_frame)
+        self._current_view = RegisterView(self._root, self._handle_show_login, self._show_login_view)
 
-        register_button = ttk.Button(master=register_frame, text="Luo tunnus")
+        self._current_view.pack()
 
-        username_text.pack(padx=5, pady=5)
-        username_field.pack(padx=5, pady=5)
-        password_text.pack(padx=5, pady=5)
-        password_field.pack(padx=5, pady=5)
-        confirm_password_text.pack(padx=5, pady=5)
-        confirm_password_field.pack(padx=5, pady=5)
-        register_button.pack(padx=5, pady=5)
+    def _show_login_view(self):
+        self._hide_current_view()
 
+        self._current_view = LoginView(self._root, self._handle_show_register, self._handle_show_front_page_view)
+
+        self._current_view.pack()
+
+    def _show_front_page_view(self):
+        self._hide_current_view()
+
+        self._current_view = FrontPageView(self._root)
+
+        self._current_view.pack()
+
+    def _handle_show_front_page_view(self):
+        self._show_front_page_view()
+
+    def _handle_show_login(self):
+        self._show_login_view()
+
+    def _handle_show_register(self):
+        self._show_register_view()
