@@ -1,4 +1,4 @@
-from tkinter import Tk, ttk
+from tkinter import Tk
 from ui.ui import UI
 
 if __name__ == "__main__":
