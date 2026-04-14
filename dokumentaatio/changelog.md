@@ -15,3 +15,4 @@
 - Luotu FrontPageView eli etusivu, johon käyttäjä ohjataan kirjautumisen jälkeen.  
 - Käyttäjä pystyy nyt luomaan uuden tunnuksen ja kirjautumaan sillä sisään.  
 - Tehty testit että käyttäjän luominen onnistuu CardServicessä, kirjautuminen toimii, ja get_user palauttaa oikean käyttäjän.  
+- Lisätty arkkitehtuuri.md ja sinne sovelluksen pakkauskaavio.  
