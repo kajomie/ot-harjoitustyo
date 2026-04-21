@@ -17,7 +17,7 @@ def create_tables(connection):
     sql = "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT);"
     cursor.execute(sql)
 
-    sql2 = "CREATE TABLE cards (id INTEGER PRIMARY KEY, question TEXT, answer TEXT);"
+    sql2 = "CREATE TABLE cards (id INTEGER PRIMARY KEY, question TEXT, answer TEXT, user_id INTEGER REFERENCES users);"
     cursor.execute(sql2)
 
     connection.commit()

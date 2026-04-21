@@ -35,7 +35,7 @@ class UI:
     def _show_front_page_view(self):
         self._hide_current_view()
 
-        self._current_view = FrontPageView(self._root)
+        self._current_view = FrontPageView(self._root, self._handle_show_login)
 
         self._current_view.pack()
 

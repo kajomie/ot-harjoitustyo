@@ -11,8 +11,9 @@ class UserRepository:
         cursor.execute(sql, [username, password])
 
         self._connection.commit()
+        user_id = cursor.lastrowid
 
-        user = User(username, password)
+        user = User(user_id, username, password)
         return user
 
     def search_user(self, user):
@@ -31,7 +32,7 @@ class UserRepository:
         cursor.execute(sql, [username, password])
         result = cursor.fetchall()
 
-        return User(result[0][1], result[0][2]) if result else None
+        return User(result[0][0], result[0][1], result[0][2]) if result else None
 
     def delete_all_users(self):
         cursor = self._connection.cursor()

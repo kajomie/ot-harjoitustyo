@@ -16,3 +16,9 @@
 - Käyttäjä pystyy nyt luomaan uuden tunnuksen ja kirjautumaan sillä sisään.  
 - Tehty testit että käyttäjän luominen onnistuu CardServicessä, kirjautuminen toimii, ja get_user palauttaa oikean käyttäjän.  
 - Lisätty arkkitehtuuri.md ja sinne sovelluksen pakkauskaavio.  
+
+## Viikko 5  
+- Tehty virheilmoituksia LoginView'lle ja RegisterView'lle sekä testit niille.  
+- Käyttäjä pystyy kirjautumaan ulos.  
+- Tehty CardView korttinäkymää varten.  
+- Käyttäjä voi nyt luoda omia muistikortteja.  

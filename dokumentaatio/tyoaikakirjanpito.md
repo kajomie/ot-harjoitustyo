@@ -11,6 +11,9 @@
 | 12.4 | 4 | Tehty kirjautuminen käyttöliittymän kautta, koodailtu metodeja ja luokkia, päivitetty dokumentaatiota |
 | 13.4 | 2 | Tehty testit CardServicelle, korjailtu Pylint-virheitä |
 | 14.4 | 1.5 | Kirjoitettu arkkitehtuuri.md, ja tehty pakkauskaavio |
+| 17.4 | 1 | Tehty virheilmoitukset LoginView'lle |
+| 18.4 | 0.5 | Tehty uloskirjautuminen ja virheilmoitus RegisterView'lle |
+| 20.4 | 2 | Toteutettu muistikortin luominen tietokantaan, tehty testejä, korjailtu koodia |
 <br/>
 
-### **Yhteensä 19.0 h**  
+### **Yhteensä 22.5 h**  
