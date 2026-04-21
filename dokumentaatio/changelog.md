@@ -24,3 +24,4 @@
 - Käyttäjä voi nyt luoda omia muistikortteja.  
 - Käyttäjä voi selata luomiaan kortteja.  
 - Käyttäjä voi tarkastella yksittäistä korttia.  
+- Lisätty arkkitehtuuri.md:hen sisäänkirjautumisen sekvenssikaavio.  
