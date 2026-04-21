@@ -22,3 +22,5 @@
 - Käyttäjä pystyy kirjautumaan ulos.  
 - Tehty CardView korttinäkymää varten.  
 - Käyttäjä voi nyt luoda omia muistikortteja.  
+- Käyttäjä voi selata luomiaan kortteja.  
+- Käyttäjä voi tarkastella yksittäistä korttia.  

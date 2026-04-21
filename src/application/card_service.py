@@ -48,4 +48,9 @@ class CardService:
         user_id = self._user.id
         return self._card_repository.create_card(question, answer, user_id)
 
+    def get_cards(self, user):
+        user_id = self._user.id
+        lista = self._card_repository.get_cards(user_id)
+        return lista
+
 card_service = CardService()

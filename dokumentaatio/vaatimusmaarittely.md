@@ -11,7 +11,9 @@ Peruskäyttäjä.
 - Jos kirjautuminen epäonnistuu, sivu ilmoittaa siitä. Muuten käyttäjälle ilmoitetaan kirjautumisen onnistuneen ja ohjataan käyttäjä etusivulle. **(TEHTY)**
 ### Sisäänkirjautumisen jälkeen  
 - Käyttäjä voi luoda omia muistikortteja. **(TEHTY)**
-- Käyttäjä selata tekemiään aiempia kortteja. Käyttäjälle näytetään kortti ja käyttäjä voi valita klikkaamalla, milloin haluaa nähdä oikean vastauksen.
+- Käyttäjä selata tekemiään aiempia kortteja. **(TEHTY)**
+- Käyttäjä voi tarkastella yksittäistä korttia. **(TEHTY)**
+- Käyttäjä voi valita korttinäkymässä korttia klikkaamalla, milloin haluaa nähdä oikean vastauksen.
 - Käyttäjä voi muokata luomiaan kortteja.
 - Käyttäjä voi poistaa luomansa kortin.
 - Käyttäjä voi muodostaa omia tekemistään korteista koostuvia pakkoja esim. tietyn aiheen mukaan.

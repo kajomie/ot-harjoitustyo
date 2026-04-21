@@ -14,6 +14,7 @@
 | 17.4 | 1 | Tehty virheilmoitukset LoginView'lle |
 | 18.4 | 0.5 | Tehty uloskirjautuminen ja virheilmoitus RegisterView'lle |
 | 20.4 | 2 | Toteutettu muistikortin luominen tietokantaan, tehty testejä, korjailtu koodia |
+| 21.4 | 3.5 | Muokattu UI:ta, päivitetty ohje.md, tehty korttien selaaminen ja korttinäkymä käyttöliittymään |
 <br/>
 
-### **Yhteensä 22.5 h**  
+### **Yhteensä 26.0 h**  

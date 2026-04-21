@@ -3,6 +3,7 @@ import tkinter as tk
 from ui.login_view import LoginView
 from ui.register_view import RegisterView
 from ui.front_page_view import FrontPageView
+from ui.card_view import CardView
 
 class UI:
     def __init__(self, root):
@@ -35,9 +36,19 @@ class UI:
     def _show_front_page_view(self):
         self._hide_current_view()
 
-        self._current_view = FrontPageView(self._root, self._handle_show_login)
+        self._current_view = FrontPageView(self._root, self._handle_show_login, self._handle_show_card_view)
 
         self._current_view.pack()
+
+    def _show_card_view(self):
+        self._hide_current_view()
+
+        self._current_view = CardView(self._root, self._handle_show_front_page_view, self._handle_show_login)
+
+        self._current_view.pack()
+
+    def _handle_show_card_view(self):
+        self._show_card_view()
 
     def _handle_show_front_page_view(self):
         self._show_front_page_view()

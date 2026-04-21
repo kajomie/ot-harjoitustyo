@@ -3,12 +3,13 @@ import tkinter as tk
 from application.card_service import card_service
 
 class FrontPageView:
-    def __init__(self, root, handle_logging_out):
+    def __init__(self, root, handle_logging_out, handle_card_view):
         self._root = root
         self._frame = None
         self._card_service = card_service
         self._user = self._card_service.get_user()
         self._handle_logging_out = handle_logging_out
+        self._handle_card_view = handle_card_view
         self._question_field = None
         self._answer_field = None
 
@@ -54,8 +55,8 @@ class FrontPageView:
         logout_button = ttk.Button(master=header, text="Kirjaudu ulos", command=self._logout_handler)
         logout_button.pack(side="right", padx=50)
 
-        welcome_text_label = ttk.Label(master=header, background="#6140c6", text=f"Tervetuloa! Olet kirjautunut sisään käyttäjänä {self._user.username}")
-        welcome_text_label.pack(side="right", padx=50)
+        welcome_text_label = ttk.Label(master=header, background="#6140c6", text=f"Olet kirjautunut sisään käyttäjänä {self._user.username}")
+        welcome_text_label.pack(side="right", padx=30)
         welcome_text_label.configure(style="header.TLabel")
 
         create_card_frame = tk.Frame(master=left_page_frame, width=400, height=400, background="#6e6ee6")
@@ -75,3 +76,5 @@ class FrontPageView:
         create_card_button = ttk.Button(master=create_card_frame, text="Luo uusi muistikortti", command=self._create_card_handler)
         create_card_button.pack(padx=50, pady=50)
 
+        card_view_button = ttk.Button(master=right_page_frame, text="Selaa kortteja", command=self._handle_card_view)
+        card_view_button.pack(padx=50, pady=50)

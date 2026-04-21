@@ -25,7 +25,7 @@ poetry run invoke start
 Ohjelman testit saadaan suorittamalla:  
 poetry run invoke test  
 </br>
-Testikattavuusraportti saadaan seuraavasti:
+Testikattavuusraportti saadaan seuraavasti:  
 poetry run invoke coverage-report  
 </br>
 

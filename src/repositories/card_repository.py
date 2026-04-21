@@ -11,8 +11,9 @@ class CardRepository:
         cursor.execute(sql, [question, answer, user_id])
 
         self._connection.commit()
+        card_id = cursor.lastrowid
 
-        card = Card(question, answer)
+        card = Card(card_id, question, answer, user_id)
         return card
 
     def get_cards(self, user_id):
@@ -21,5 +22,11 @@ class CardRepository:
         sql = "SELECT * FROM cards WHERE cards.user_id = ?"
         cursor.execute(sql, [user_id])
         result = cursor.fetchall()
+        lista = []
 
-        return result if result else None
+        if result:
+            for c in result:
+                card = Card(c[0], c[1], c[2], c[3])
+                lista.append(card)
+
+        return lista
