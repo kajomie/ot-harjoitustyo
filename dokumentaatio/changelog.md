@@ -33,3 +33,5 @@
 - Luotu pakoille myös oma luokka Deck.  
 - Käyttäjä voi nyt luoda pakan ja valita korteille pakan.  
 - Tehty testiluokka CardRepositorylle.  
+- Kirjoitettu Docstring-kommentteja luokille.  
+- Julkaistu uusi release.  
