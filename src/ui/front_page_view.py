@@ -12,6 +12,9 @@ class FrontPageView:
         self._handle_card_view = handle_card_view
         self._question_field = None
         self._answer_field = None
+        self._deck_name_field = None
+        self._decks = self._card_service.get_decks(self._user.id)
+        self._deck_options = None
 
         self._initialize()
 
@@ -28,12 +31,21 @@ class FrontPageView:
     def _create_card_handler(self):
         question = self._question_field.get()
         answer = self._answer_field.get()
-        self._card_service.create_new_card(question, answer)
+        current_deck = self._deck_options.get()
+        deck_id = None
+        for d in self._decks:
+            if current_deck == d.name:
+                deck_id = d.id
+        self._card_service.create_new_card(question, answer, deck_id)
+
+    def _create_deck_handler(self):
+        deck_name = self._deck_name_field.get()
+        self._card_service.create_new_deck(deck_name)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         header = tk.Frame(master=self._frame, background="#6140c6", height=150)
-        footer = tk.Frame(master=self._frame, background="#6140c6", height=150)
+        footer = tk.Frame(master=self._frame, background="#6140c6", height=100)
         main = tk.Frame(master=self._frame, background="#f4f4fd")
 
         header.pack(side="top", fill="x")
@@ -72,9 +84,28 @@ class FrontPageView:
         self._answer_field = ttk.Entry(master=create_card_frame)
         answer_label.pack(padx=5, pady=5)
         self._answer_field.pack(padx=5, pady=5)
+        choose_deck_label = ttk.Label(master=create_card_frame, text="Kortin pakka:", background="#6e6ee6", style="header.TLabel")
+        choose_deck_label.pack(padx=5, pady=10)
+        decklist = [pakka.name for pakka in self._decks]
+        self._deck_options = ttk.Combobox(create_card_frame, state="readonly")
+        self._deck_options.set("Valitse pakka")
+        self._deck_options["values"] = decklist
+        self._deck_options.pack(padx=5, pady=5)
 
         create_card_button = ttk.Button(master=create_card_frame, text="Luo uusi muistikortti", command=self._create_card_handler)
         create_card_button.pack(padx=50, pady=50)
 
         card_view_button = ttk.Button(master=right_page_frame, text="Selaa kortteja", command=self._handle_card_view)
         card_view_button.pack(padx=50, pady=50)
+
+        create_deck_frame = tk.Frame(master=left_page_frame, width=400, height=400, background="#9999ed")
+        create_deck_frame.pack(padx=20, pady=20)
+        create_deck_label = ttk.Label(master=create_deck_frame, text="Luo uusi pakka", font=("Helvetica", 16), background="#9999ed", style="header.TLabel")
+        create_deck_label.pack(side="top", padx=20, pady=20)
+        deck_label = ttk.Label(master=create_deck_frame, text="Pakan nimi:", background="#9999ed", style="header.TLabel")
+        self._deck_name_field = ttk.Entry(master=create_deck_frame)
+        deck_label.pack(padx=5, pady=5)
+        self._deck_name_field.pack(padx=40, pady=10)
+
+        create_deck_button = ttk.Button(master=create_deck_frame, text="Luo uusi pakka", command=self._create_deck_handler)
+        create_deck_button.pack(padx=5, pady=20)

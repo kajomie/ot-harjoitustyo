@@ -44,13 +44,23 @@ class CardService:
     def logout(self):
         self._user = None
 
-    def create_new_card(self, question, answer):
+    def create_new_card(self, question, answer, deck_id):
         user_id = self._user.id
-        return self._card_repository.create_card(question, answer, user_id)
+        return self._card_repository.create_card(question, answer, user_id, deck_id)
 
     def get_cards(self, user):
         user_id = self._user.id
         lista = self._card_repository.get_cards(user_id)
+        return lista
+
+    def create_new_deck(self, name):
+        user_id = self._user.id
+        pakka = self._card_repository.create_deck(name, user_id)
+        return pakka
+
+    def get_decks(self, user):
+        user_id = self._user.id
+        lista = self._card_repository.get_decks(user_id)
         return lista
 
 card_service = CardService()

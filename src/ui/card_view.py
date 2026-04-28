@@ -39,12 +39,15 @@ class CardView:
 
     def _show_selected_card(self):
         self._question_variable.set(self._current_card.question)
+        self._answer_variable.set("")
+
+    def _show_answer(self):
         self._answer_variable.set(self._current_card.answer)
 
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         header = tk.Frame(master=self._frame, background="#6140c6", height=150)
-        footer = tk.Frame(master=self._frame, background="#6140c6", height=150)
+        footer = tk.Frame(master=self._frame, background="#6140c6", height=100)
         main = tk.Frame(master=self._frame, background="#f4f4fd")
 
         header.pack(side="top", fill="x")
@@ -96,10 +99,16 @@ class CardView:
         question_label = ttk.Label(master=right_page_frame, textvariable=self._question_variable, background="#f4f4fd")
         question_label.pack(padx=10, pady=15)
 
+        separator = ttk.Separator(right_page_frame, orient='horizontal')
+        separator.pack(fill="x", padx=20, pady=10)
+
         self._answer_variable = StringVar()
         self._answer_variable.set("")
         answer_label = ttk.Label(master=right_page_frame, textvariable=self._answer_variable, background="#f4f4fd")
         answer_label.pack(padx=10, pady=15)
+
+        show_answer_button = ttk.Button(master=right_page_frame, text="Näytä vastaus", command=self._show_answer)
+        show_answer_button.pack(padx=10, pady=10)
 
         back_button = ttk.Button(master=footer, text="Takaisin etusivulle", command=self._handle_front_page_view)
         back_button.pack(side="left", padx=50, pady=50)

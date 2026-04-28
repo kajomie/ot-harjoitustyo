@@ -15,6 +15,9 @@
 | 18.4 | 0.5 | Tehty uloskirjautuminen ja virheilmoitus RegisterView'lle |
 | 20.4 | 2 | Toteutettu muistikortin luominen tietokantaan, tehty testejä, korjailtu koodia |
 | 21.4 | 3.5 | Muokattu UI:ta, päivitetty ohje.md ja lisätty kaavio, tehty korttien selaaminen ja korttinäkymä käyttöliittymään |
+| 26.4 | 1 | Tehty vastauksen näyttäminen nappia painamalla korttinäkymään, muokattu UI:ta |
+| 27.4 | 2 | Tehty pakka-luokka, päivitetty tietokantaa, lisätty pakan luomistoiminto käyttöliittymään |
+| 28.4 | 1.5 | Jatkettu pakan luomista käyttöliittymässä, tehty CardRepositoryTest ja muutama testi |
 <br/>
 
-### **Yhteensä 26.0 h**  
+### **Yhteensä 30.5 h**  

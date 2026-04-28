@@ -19,7 +19,10 @@ Käyttäjä voi tehdä uuden tunnuksen rekisteröitymissivulla. Hän voi syött�
 Kun tunnus on luotu, niin käyttäjä voi kirjautua sisään kirjautumissivulta. Kun käyttäjätunnus ja salasana on syötetty, niin painetaan "Kirjaudu sisään". Jos kirjautuminen onnistuu, niin käyttäjä ohjataan etusivulle.  
 
 ### Muistikorttien luominen  
-Muistikortteja voi luoda etusivulla vasemmalla puolella sijaitsevalla "Luo uusi muistikortti"-lomakkeella. Käyttäjä kirjoittaa kysymyksen ja vastauksen kenttiin. Painamalla "Luo uusi muistikortti" luodaan uusi kortti.  
+Muistikortteja voi luoda etusivulla vasemmalla puolella sijaitsevalla "Luo uusi muistikortti"-lomakkeella. Käyttäjä kirjoittaa kysymyksen ja vastauksen kenttiin ja valitsee kortin pakan olemassaolevista pakoista. Painamalla "Luo uusi muistikortti" luodaan uusi kortti.  
+
+### Pakkojen luominen  
+Pakan luominen toimii etusivun vasemman puolen alakulman "Luo uusi akka"-lomakkeella. Käyttäjä kirjoittaa pakan nimen ja painaa "Luo uusi pakka", joka luo uuden pakan.  
 
 ### Kirjautuminen ulos  
 Etusivun oikeassa yläkulmassa on "Kirjaudu ulos"-nappi. Painamalla sitä käyttäjä kirjataan ulos sovelluksesta ja ohjataan takaisin kirjautumissivulle.  

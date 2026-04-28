@@ -25,3 +25,11 @@
 - Käyttäjä voi selata luomiaan kortteja.  
 - Käyttäjä voi tarkastella yksittäistä korttia.  
 - Lisätty arkkitehtuuri.md:hen sisäänkirjautumisen sekvenssikaavio.  
+- Julkaistu release.  
+
+## Viikko 6  
+- Tehty korttinäkymään vastauksen näyttäminen nappia painamalla.  
+- Lisätty tietokantaan decks-taulu pakkoja varten.  
+- Luotu pakoille myös oma luokka Deck.  
+- Käyttäjä voi nyt luoda pakan ja valita korteille pakan.  
+- Tehty testiluokka CardRepositorylle.  

@@ -13,10 +13,11 @@ Peruskäyttäjä.
 - Käyttäjä voi luoda omia muistikortteja. **(TEHTY)**
 - Käyttäjä selata tekemiään aiempia kortteja. **(TEHTY)**
 - Käyttäjä voi tarkastella yksittäistä korttia. **(TEHTY)**
-- Käyttäjä voi valita korttinäkymässä korttia klikkaamalla, milloin haluaa nähdä oikean vastauksen.
+- Käyttäjä voi valita korttinäkymässä korttia klikkaamalla, milloin haluaa nähdä oikean vastauksen. **(TEHTY)**
 - Käyttäjä voi muokata luomiaan kortteja.
 - Käyttäjä voi poistaa luomansa kortin.
-- Käyttäjä voi muodostaa omia tekemistään korteista koostuvia pakkoja esim. tietyn aiheen mukaan.
+- Käyttäjä voi muodostaa omia tekemistään korteista koostuvia pakkoja esim. tietyn aiheen mukaan. **(TEHTY)**
+- Käyttäjä voi filtteröidä kortteja pakan mukaan.  
 - Käyttäjä voi poistaa luomansa pakan.
 - Käyttäjä voi kirjautua ulos sovelluksesta. **(TEHTY)**
 

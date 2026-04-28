@@ -46,7 +46,7 @@ class RegisterView:
     def _initialize(self):
         self._frame = ttk.Frame(master=self._root)
         header = tk.Frame(master=self._frame, background="#6140c6", height=150)
-        footer = tk.Frame(master=self._frame, background="#6140c6", height=150)
+        footer = tk.Frame(master=self._frame, background="#6140c6", height=100)
         main = tk.Frame(master=self._frame, background="#f4f4fd")
 
         header.pack(side="top", fill="x")

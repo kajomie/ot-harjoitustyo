@@ -11,7 +11,7 @@ Muistikorttisovelluksessa käyttäjä voi tunnuksen tehtyään ja sisäänkirjau
 </br>
 
 ## Releaset   
-[Viikon 5 Release](https://github.com/kajomie/ot-harjoitustyo/releases/tag/viikko5)  
+[Viikko 5](https://github.com/kajomie/ot-harjoitustyo/releases/tag/viikko5)  
 </br>
 
 ## Käynnistys  

@@ -9,15 +9,15 @@ Ohjelma pyrkii noudattamaan repository-suunnittelumallia. Sovellus on jaettu nel
 Käyttöliittymässä on neljä eri näkymää, joista jokaisella on oma luokkansa. Ne ovat:  
 - **RegisterView** eli rekisteröitymissivu.  
 - **LoginView** eli kirjautumissivu.  
-- **FrontPageView** eli etusivu johon käyttäjä ohjataan kirjautumisen jälkeen ja jossa voi valita erilaisia toimintoja kuten esim. muistikorttien luominen.  
+- **FrontPageView** eli etusivu johon käyttäjä ohjataan kirjautumisen jälkeen ja jossa voi valita erilaisia toimintoja kuten esim. muistikorttien luominen ja uuden pakan luominen.  
 - **CardView** eli itse muistikortti, jossa on kaksi eri puolta eli kysymys ja vastaus. CardView'ssä käyttäjälle näytetään ensin kysymyspuoli ja painiketta painamalla voi nähdä vastauksen.  
 
 ### Sovelluslogiikka  
-Sovelluksessa on luokka **User**, joka vastaa sovelluksen käyttäjää ja luokka **Card**, joka vastaa muistikorttia. Käyttäjä voi luoda monia muistikortteja, mutta kullakin muistikortilla voi olla vain 1 luoja eli siihen liittyvä käyttäjä. Käyttäjistä tallennetaan id, käyttäjänimi ja salasana, korteista taas id, kysymys ja vastaus.  
+Sovelluksessa on luokka **User**, joka vastaa sovelluksen käyttäjää ja luokka **Card**, joka vastaa muistikorttia. Lisäksi sovelluksessa on luokka **Deck**, joka kuvaa pakkaa. Käyttäjä voi luoda monia muistikortteja, mutta kullakin muistikortilla voi olla vain 1 luoja eli siihen liittyvä käyttäjä. Käyttäjä voi luoda monta pakkaa. Pakassa on monta korttia, mutta kullakin kortilla voi olla vain 1 pakka. Käyttäjistä tallennetaan id, käyttäjänimi ja salasana, korteista taas id, kysymys, vastaus ja pakan id. Pakasta tallennetaan id, sen nimi ja sen luoneen käyttäjän id.
 Luokka **CardService** sisältää sovelluslogiikan toiminnot, kuten rekisteröityminen ja kirjautuminen, ja se hyödyntää siinä repositorioita UserRepository ja CardRepository.  
 
 ### Datan tallennus  
-Repositoriot **UserRepository** ja **CardRepository** vastaavat käyttäjiin ja kortteihin liittyvän datan tallennuksesta. Molemmat repositoriot tallentavat tietoa sqlite3:n avulla tietokantaan tauluihin users ja cards. Tietokanta alustetaan initialize_database-tiedoston avulla.  
+Repositoriot **UserRepository** ja **CardRepository** vastaavat käyttäjiin, kortteihin ja pakkoihin liittyvän datan tallennuksesta. Molemmat repositoriot tallentavat tietoa sqlite3:n avulla tietokantaan tauluihin users, cards ja decks. Tietokanta alustetaan initialize_database-tiedoston avulla.  
 
 ### Toiminnallisuus  
 #### Rekisteröityminen  
@@ -33,5 +33,5 @@ Kun kirjautuminen onnistuu, niin käyttäjä ohjataan etusivulle. Etusivun kautt
 Uloskirjautuminen toimii samoin tapahtumakäsittelijän kautta, joka taaskin kutsuu CardServicen logout-metodia. Käyttäjä ohjataan takaisin kirjautumissivulle.  
 
 #### Muistikortit  
-Muistikorteilla on kaksi puolta, kysymys ja vastaus. Molemmat niistä annetaan korttia luodessa. Muistikorttinäkymässä näytetään ensin kysymys, ja painiketta painamalla käyttäjä voi valita, milloin haluaa nähdä vastauksen. Kortit voi myöhemmin jakaa pakkoihin aihepiirin mukaan (pakkojen toteutus mahdollisesti esim. cards-tauluun lisätyn attribuutin tai kokonaan uuden tietokantataulun avulla).  
+Muistikorteilla on kaksi puolta, kysymys ja vastaus. Molemmat niistä annetaan korttia luodessa. Uudelle kortille valitaan myös sen pakka, joka tulee luoda ennen korttia. Muistikorttinäkymässä näytetään ensin kysymys, ja painiketta painamalla käyttäjä voi valita, milloin haluaa nähdä vastauksen.  
 Uutta korttia luodessa tapahtumankäsittelijä kutsuu CardServicen metodia uuden kortin luomiseen, joka edelleen ottaa yhteyttä CardRepositoryyn ja tallentaa tiedot tietokantaan. Kun kortti on luotu, niin käyttöliittymä näyttää tämän luodun kortin korttinäkymän.  
