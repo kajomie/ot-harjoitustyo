@@ -4,7 +4,16 @@ from application.card_service import card_service, WrongUsernameOrPassword
 from repositories.user_repository import UserRepository
 
 class LoginView:
+    """Kirjautumisnäkymän luokka.
+    """
     def __init__(self, root, handle_register, handle_logging_in):
+        """LoginView-luokan konstruktori.
+
+        Args:
+            root: Näkymän 'juuri', jonka sisään se rakennetaan.
+            handle_register: Rekisteröinnin tapahtumakäsittelijä.
+            handle_logging_in: Sisäänkirjautumisen tapahtumakäsittelijä.
+        """
         self._root = root
         self._handle_register = handle_register
         self._handle_logging_in = handle_logging_in
@@ -18,12 +27,18 @@ class LoginView:
         self._initialize()
 
     def pack(self):
+        """Näkymän näyttäminen.
+        """
         self._frame.pack(fill="both", expand=True)
 
     def destroy(self):
+        """Näkymän poisto.
+        """
         self._frame.destroy()
 
     def _login_handler(self):
+        """Sisäänkirjautumisen tapahtumakäsittelijä.
+        """
         username = self._username_field.get()
         password = self._password_field.get()
 
@@ -34,12 +49,18 @@ class LoginView:
             self._show_error_message()
 
     def _show_error_message(self):
+        """Virheviestin näyttäminen StringVarin avulla.
+        """
         self._myvar.set("Väärä käyttäjätunnus tai salasana!")
 
     def _hide_error_message(self):
+        """Virheviestin piilottaminen StringVaria päivittämällä.
+        """
         self._myvar.set("")
 
     def _initialize(self):
+        """Kirjautumissivun alustaminen.
+        """
         self._frame = ttk.Frame(master=self._root)
         header = tk.Frame(master=self._frame, background="#6140c6", height=150)
         footer = tk.Frame(master=self._frame, background="#6140c6", height=100)

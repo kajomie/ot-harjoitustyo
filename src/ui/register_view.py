@@ -4,7 +4,16 @@ from application.card_service import card_service, UsernameAlreadyInUse, EmptyNa
 from repositories.user_repository import UserRepository
 
 class RegisterView:
+    """Rekisteröintinäkymän luokka.
+    """
     def __init__(self, root, handle_show_login, handle_create_new_user):
+        """RegisterView-luokan konstruktori.
+
+        Args:
+            root: Näkymän 'juuri' johon se rakentuu.
+            handle_show_login: Kirjautumisnäkymän näytön tapahtumakäsittelijä.
+            handle_create_new_user: Uuden käyttäjän luomisen tapahtumakäsittelijä.
+        """
         self._root = root
         self._handle_show_login = handle_show_login
         self._handle_create_new_user = handle_create_new_user
@@ -18,12 +27,18 @@ class RegisterView:
         self._initialize()
 
     def pack(self):
+        """Näkymän näyttäminen.
+        """
         self._frame.pack(fill="both", expand=True)
 
     def destroy(self):
+        """Näkyminen poistaminen.
+        """
         self._frame.destroy()
 
     def _create_new_user_handler(self):
+        """Uuden käyttäjän luomisessa käytettävä tapahtumakäsittelijä.
+        """
         username = self._username_field.get()
         password = self._password_field.get()
 
@@ -38,12 +53,21 @@ class RegisterView:
             self._show_error_message("Käyttäjätunnus on jo varattu!")
 
     def _show_error_message(self, message):
+        """Virheviestin näyttö.
+
+        Args:
+            message: Virheviesti parametrina, joka näytetään käyttäjälle.
+        """
         self._myvar.set(message)
 
     def _hide_error_message(self):
+        """Virheviestin piilotus StringVar tyhjentämällä.
+        """
         self._myvar.set("")
 
     def _initialize(self):
+        """Rekisteröintisivun alustus.
+        """
         self._frame = ttk.Frame(master=self._root)
         header = tk.Frame(master=self._frame, background="#6140c6", height=150)
         footer = tk.Frame(master=self._frame, background="#6140c6", height=100)

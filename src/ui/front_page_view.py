@@ -3,7 +3,16 @@ import tkinter as tk
 from application.card_service import card_service
 
 class FrontPageView:
+    """Etusivun näkymän luokka.
+    """
     def __init__(self, root, handle_logging_out, handle_card_view):
+        """FrontPageView-luokan konstruktori.
+
+        Args:
+            root: Näkymän 'juuri', jonka sisään näkymä rakentuu.
+            handle_logging_out: Uloskirjautumisen tapahtumakäsittelijä.
+            handle_card_view: Korttinäkymän tapahtumakäsittelijä.
+        """
         self._root = root
         self._frame = None
         self._card_service = card_service
@@ -19,16 +28,24 @@ class FrontPageView:
         self._initialize()
 
     def pack(self):
+        """Näkymän näyttö.
+        """
         self._frame.pack(fill="both", expand=True)
 
     def destroy(self):
+        """Näkymän poisto.
+        """
         self._frame.destroy()
 
     def _logout_handler(self):
+        """Uloskirjautumisen tapahtumakäsittelijä.
+        """
         self._card_service.logout()
         self._handle_logging_out()
 
     def _create_card_handler(self):
+        """Uuden kortin luomisesta vastaava tapahtumakäsittelijä.
+        """
         question = self._question_field.get()
         answer = self._answer_field.get()
         current_deck = self._deck_options.get()
@@ -39,10 +56,14 @@ class FrontPageView:
         self._card_service.create_new_card(question, answer, deck_id)
 
     def _create_deck_handler(self):
+        """Uuden pakan luomisesta vastaava tapahtumakäsittelijä.
+        """
         deck_name = self._deck_name_field.get()
         self._card_service.create_new_deck(deck_name)
 
     def _initialize(self):
+        """Etusivun näkymän alustus.
+        """
         self._frame = ttk.Frame(master=self._root)
         header = tk.Frame(master=self._frame, background="#6140c6", height=150)
         footer = tk.Frame(master=self._frame, background="#6140c6", height=100)

@@ -4,7 +4,16 @@ from tkinter import *
 from application.card_service import card_service
 
 class CardView:
+    """Korttinäkymän luokka.
+    """
     def __init__(self, root, handle_front_page_view, handle_logging_out):
+        """CardView-luokan konstruktori.
+
+        Args:
+            root: Käyttöliittymän 'juuri', jonka sisään sivu rakentuu.
+            handle_front_page_view: Etusivun tapahtumakäsittelijä.
+            handle_logging_out: Uloskirjautumisen tapahtumakäsittelijä.
+        """
         self._root = root
         self._frame = None
         self._card_service = card_service
@@ -20,16 +29,24 @@ class CardView:
         self._initialize()
 
     def pack(self):
+        """Näkymän näyttö.
+        """
         self._frame.pack(fill="both", expand=True)
 
     def destroy(self):
+        """Näkymän poisto.
+        """
         self._frame.destroy()
 
     def _logout_handler(self):
+        """Uloskirjautumisen tapahtumakäsittelijä.
+        """
         self._card_service.logout()
         self._handle_logging_out()
 
     def _select_card_handler(self):
+        """Valitun kortin tapahtumakäsittelijä.
+        """
         selected = self._cardlist.curselection()
         if selected:
             self._current_card = self._cards[selected[0]]
@@ -38,13 +55,19 @@ class CardView:
             return
 
     def _show_selected_card(self):
+        """Valitun kortin näyttäminen.
+        """
         self._question_variable.set(self._current_card.question)
         self._answer_variable.set("")
 
     def _show_answer(self):
+        """Vastauksen näyttäminen, kun nappia painetaan.
+        """
         self._answer_variable.set(self._current_card.answer)
 
     def _initialize(self):
+        """Korttinäkymän alustaminen.
+        """
         self._frame = ttk.Frame(master=self._root)
         header = tk.Frame(master=self._frame, background="#6140c6", height=150)
         footer = tk.Frame(master=self._frame, background="#6140c6", height=100)

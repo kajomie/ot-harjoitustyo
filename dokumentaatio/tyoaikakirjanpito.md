@@ -17,7 +17,7 @@
 | 21.4 | 3.5 | Muokattu UI:ta, päivitetty ohje.md ja lisätty kaavio, tehty korttien selaaminen ja korttinäkymä käyttöliittymään |
 | 26.4 | 1 | Tehty vastauksen näyttäminen nappia painamalla korttinäkymään, muokattu UI:ta |
 | 27.4 | 2 | Tehty pakka-luokka, päivitetty tietokantaa, lisätty pakan luomistoiminto käyttöliittymään |
-| 28.4 | 1.5 | Jatkettu pakan luomista käyttöliittymässä, tehty CardRepositoryTest ja muutama testi |
+| 28.4 | 2 | Jatkettu pakan luomista käyttöliittymässä, tehty CardRepositoryTest ja muutama testi, kirjoitettu DocString |
 <br/>
 
-### **Yhteensä 30.5 h**  
+### **Yhteensä 31 h**  
