@@ -1,4 +1,4 @@
-from tkinter import Tk, ttk, constants, StringVar
+from tkinter import Tk, ttk, StringVar, messagebox
 import tkinter as tk
 from tkinter import *
 from application.card_service import card_service
@@ -25,6 +25,12 @@ class CardView:
         self._cardlist = None
         self._question_variable = None
         self._answer_variable = None
+        self._decks = self._card_service.get_decks(self._user.id)
+        self._deck_options = None
+        self._current_deck = None
+        self._toggle_answer_button = None
+        self._answer_is_showing = False
+        self._delete_card_button = None
 
         self._initialize()
 
@@ -44,9 +50,18 @@ class CardView:
         self._card_service.logout()
         self._handle_logging_out()
 
-    def _select_card_handler(self):
+    def _clear_view(self):
+        self._question_variable.set("")
+        self._answer_variable.set("")
+        self._current_card = None
+        self._answer_is_showing = False
+        self._toggle_answer_button.pack_forget()
+        self._delete_card_button.pack_forget()
+
+    def _select_card_handler(self, event):
         """Valitun kortin tapahtumakäsittelijä.
         """
+        self._clear_view()
         selected = self._cardlist.curselection()
         if selected:
             self._current_card = self._cards[selected[0]]
@@ -58,12 +73,69 @@ class CardView:
         """Valitun kortin näyttäminen.
         """
         self._question_variable.set(self._current_card.question)
-        self._answer_variable.set("")
+        self._toggle_answer_button.config(text="Näytä vastaus")
+        self._toggle_answer_button.pack(padx=10, pady=10)
+        self._delete_card_button.pack(side="bottom", anchor="e", padx=10, pady=10)
 
-    def _show_answer(self):
+    def _toggle_answer(self):
         """Vastauksen näyttäminen, kun nappia painetaan.
         """
-        self._answer_variable.set(self._current_card.answer)
+        if self._current_card is None:
+            return
+
+        if self._answer_is_showing:
+            self._toggle_answer_button.config(text="Näytä vastaus")
+            self._answer_is_showing = False
+            self._answer_variable.set("")
+        else:
+            self._answer_variable.set(self._current_card.answer)
+            self._toggle_answer_button.config(text="Piilota vastaus")
+            self._answer_is_showing = True
+
+    def _update_card_list(self):
+        self._cardlist.delete(0, "end")
+        for card in self._cards:
+            self._cardlist.insert(END, card.question)
+
+    def _filter_by_deck(self, event):
+        """Korttien suodatus niiden pakan mukaan.
+        """
+        selected = self._deck_options.get()
+
+        if selected:
+            self._clear_view()
+
+            if selected == "(Näytä kaikki kortit)":
+                self._current_deck = None
+                self._cards = self._card_service.get_cards(self._user.id)
+                self._update_card_list()
+            else:
+                deck_id = None
+
+                for d in self._decks:
+                    if selected == d.name:
+                        deck_id = d.id
+                        self._current_deck = d
+
+                if deck_id is not None:
+                    self._cards = self._card_service.get_deck_cards(deck_id)
+                    self._update_card_list()
+        else:
+            return
+
+    def _delete_card(self):
+        confirm_delete = messagebox.askokcancel("askokcancel", "Haluatko varmasti poistaa tämän kortin?")
+        if confirm_delete:
+            self._card_service.delete_card(self._current_card.id)
+            self._clear_view()
+            if self._current_deck is not None:
+                self._cards = self._card_service.get_deck_cards(self._current_deck.id)
+            else:
+                self._cards = self._card_service.get_cards(self._user.id)
+            self._update_card_list()
+            return
+        else:
+            return
 
     def _initialize(self):
         """Korttinäkymän alustaminen.
@@ -102,6 +174,15 @@ class CardView:
         browse_card_label = ttk.Label(master=browse_card_frame, text="Selaa kortteja", font=("Helvetica", 16), background="#d2d2f7")
         browse_card_label.pack(side="top", pady=20, padx=50)
 
+        filter_deck_label = ttk.Label(master=browse_card_frame, text="Suodata pakan mukaan:", background="#d2d2f7")
+        filter_deck_label.pack(padx=5, pady=5)
+        decklist = ["(Näytä kaikki kortit)"] + [pakka.name for pakka in self._decks]
+        self._deck_options = ttk.Combobox(browse_card_frame, state="readonly")
+        self._deck_options.set("(Näytä kaikki kortit)")
+        self._deck_options["values"] = decklist
+        self._deck_options.pack(padx=5, pady=5)
+        self._deck_options.bind("<<ComboboxSelected>>", self._filter_by_deck)
+
         lista = Listbox(browse_card_frame)
         lista.pack(side="left", fill="both", pady=20, padx=20)
         scroll = Scrollbar(browse_card_frame)
@@ -114,8 +195,7 @@ class CardView:
         for card in self._cards:
             lista.insert(END, card.question)
 
-        select_button = ttk.Button(master=left_page_frame, text="Valitse kortti", command=self._select_card_handler)
-        select_button.pack(side="bottom", padx=10, pady=10)
+        lista.bind('<<ListboxSelect>>',self._select_card_handler)
 
         self._question_variable = StringVar()
         self._question_variable.set("")
@@ -130,8 +210,13 @@ class CardView:
         answer_label = ttk.Label(master=right_page_frame, textvariable=self._answer_variable, background="#f4f4fd")
         answer_label.pack(padx=10, pady=15)
 
-        show_answer_button = ttk.Button(master=right_page_frame, text="Näytä vastaus", command=self._show_answer)
-        show_answer_button.pack(padx=10, pady=10)
+        self._toggle_answer_button = ttk.Button(master=right_page_frame, text="Näytä vastaus", command=self._toggle_answer)
+        self._toggle_answer_button.pack(padx=10, pady=10)
+        self._toggle_answer_button.pack_forget()
+
+        self._delete_card_button = ttk.Button(master=right_page_frame, text="Poista kortti", command=self._delete_card)
+        self._delete_card_button.pack(side="bottom", anchor="e", padx=10, pady=10)
+        self._delete_card_button.pack_forget()
 
         back_button = ttk.Button(master=footer, text="Takaisin etusivulle", command=self._handle_front_page_view)
         back_button.pack(side="left", padx=50, pady=50)

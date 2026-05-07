@@ -1,4 +1,4 @@
-from tkinter import Tk, ttk, constants
+from tkinter import Tk, ttk, StringVar, messagebox
 import tkinter as tk
 from application.card_service import card_service
 
@@ -49,17 +49,39 @@ class FrontPageView:
         question = self._question_field.get()
         answer = self._answer_field.get()
         current_deck = self._deck_options.get()
+
+        if not question or not answer or not current_deck:
+            messagebox.showerror("showerror", "Kortin kysymys, vastaus tai pakka eivät saa olla tyhjiä!")
+            return
+
         deck_id = None
         for d in self._decks:
             if current_deck == d.name:
                 deck_id = d.id
         self._card_service.create_new_card(question, answer, deck_id)
+        self._question_field.delete(0, 'end')
+        self._answer_field.delete(0, 'end')
+        messagebox.showinfo("showinfo", "Kortti luotu onnistuneesti.")
 
     def _create_deck_handler(self):
         """Uuden pakan luomisesta vastaava tapahtumakäsittelijä.
         """
         deck_name = self._deck_name_field.get()
+
+        if not deck_name:
+            messagebox.showerror("showerror", "Pakan nimi ei saa olla tyhjä!") 
+            return
+
         self._card_service.create_new_deck(deck_name)
+        self._update_decks()
+        self._deck_name_field.delete(0, 'end')
+        messagebox.showinfo("showinfo", "Pakka luotu onnistuneesti.")
+
+    def _update_decks(self):
+        self._decks = self._card_service.get_decks(self._user.id)
+        decklist = [pakka.name for pakka in self._decks]
+        self._deck_options.set("Valitse pakka")
+        self._deck_options["values"] = decklist
 
     def _initialize(self):
         """Etusivun näkymän alustus.
@@ -109,7 +131,6 @@ class FrontPageView:
         choose_deck_label.pack(padx=5, pady=10)
         decklist = [pakka.name for pakka in self._decks]
         self._deck_options = ttk.Combobox(create_card_frame, state="readonly")
-        self._deck_options.set("Valitse pakka")
         self._deck_options["values"] = decklist
         self._deck_options.pack(padx=5, pady=5)
 

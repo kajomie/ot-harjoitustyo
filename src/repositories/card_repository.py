@@ -142,6 +142,15 @@ class CardRepository:
 
         return lista
 
+    def delete_card(self, card_id):
+        """Yksittäisen kortin poisto.
+        """
+        cursor = self._connection.cursor()
+        sql = "DELETE FROM cards WHERE cards.id = ?"
+        cursor.execute(sql, [card_id])
+
+        self._connection.commit()
+
     def delete_all_cards(self):
         """Kaikkien korttien poisto tietokannasta.
         """

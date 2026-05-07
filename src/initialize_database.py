@@ -17,10 +17,20 @@ def create_tables(connection):
     sql = "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT);"
     cursor.execute(sql)
 
-    sql2 = "CREATE TABLE decks (id INTEGER PRIMARY KEY, name TEXT, user_id INTEGER REFERENCES users);"
+    sql2 = """CREATE TABLE decks (
+    id INTEGER PRIMARY KEY, 
+    name TEXT, 
+    user_id INTEGER REFERENCES users
+    );"""
     cursor.execute(sql2)
 
-    sql3 = "CREATE TABLE cards (id INTEGER PRIMARY KEY, question TEXT, answer TEXT, user_id INTEGER REFERENCES users, deck_id INTEGER REFERENCES decks);"
+    sql3 = """CREATE TABLE cards (
+    id INTEGER PRIMARY KEY, 
+    question TEXT, 
+    answer TEXT, 
+    user_id INTEGER REFERENCES users, 
+    deck_id INTEGER REFERENCES decks
+    );"""
     cursor.execute(sql3)
 
     connection.commit()

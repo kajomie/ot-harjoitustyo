@@ -1,6 +1,6 @@
 # Arkkitehtuuri  
 
-![Sovelluksen pakkauskaavio](pakkauskaavio.png)  
+![Sovelluksen pakkauskaavio](/dokumentaatio/kuvat/pakkauskaavio.png)  
 
 ### Rakenne  
 Ohjelma pyrkii noudattamaan repository-suunnittelumallia. Sovellus on jaettu neljään osaan: **ui**, **classes**, **repositories** ja **application**. Ui-hakemistossa on käyttöliittymä, kun taas classes sisältää luokat, repositories vastaavasti repositoriot ja application sovelluslogiikan.  
@@ -26,7 +26,7 @@ Tapahtumankäsittelijä antaa CardServicen metodille create_new_user parametrein
 Kun käyttäjä on luotu onnistuneesti, hänet ohjataan kirjautumissivulle jossa hän voi kirjautua sisään uudella tunnuksellaan.  
 
 #### Sisään- ja uloskirjautuminen  
-![Kirjautumisen sekvenssikaavio](sekvenssikaavio-login.png)  
+![Kirjautumisen sekvenssikaavio](/dokumentaatio/kuvat/sekvenssikaavio-login.png)  
 
 Käyttäjä voi syöttää tunnuksen ja salasanan. Tapahtumankäsittelijä kutsuu CardServicen login-metodia, joka edelleen kutsuu UserRepositoryn check_login-metodia, joka taas etsii käyttäjän käyttäjänimen ja salasanan avulla tietokannasta. Jos käyttäjänimeä ja salasanaa vastaava käyttäjä löytyy tietokannasta, niin käyttäjä kirjataan sisään ja sisäinen user-muuttuja muutetaan vastaamaan kyseistä käyttäjää. Jos kirjautuminen ei onnistu (esim. väärän tunnuksen tai salasanan takia), niin käyttäjä saa siitä virheilmoituksen.  
 Kun kirjautuminen onnistuu, niin käyttäjä ohjataan etusivulle. Etusivun kautta voi valita suorittaa erilaisia sovelluksen tarjoamia toimintoja, kuten selata aiemmin luotuja muistikortteja tai tehdä uusia muistikortteja.  

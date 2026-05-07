@@ -18,6 +18,9 @@
 | 26.4 | 1 | Tehty vastauksen näyttäminen nappia painamalla korttinäkymään, muokattu UI:ta |
 | 27.4 | 2 | Tehty pakka-luokka, päivitetty tietokantaa, lisätty pakan luomistoiminto käyttöliittymään |
 | 28.4 | 2 | Jatkettu pakan luomista käyttöliittymässä, tehty CardRepositoryTest ja muutama testi, kirjoitettu Docstring |
+| 3.5 | 1.5 | Tehty UI:n automaattinen päivitys kun uusi pakka luodaan ja kortti valitaan, tehty pakan filtteröinti |
+| 5.5 | 1 | Lisätty korttinäkymään kaikkien korttien listaus, toggle-nappi vastaukselle, paranneltu korttinäkymää |
+| 6.5 | 1 | Tehty kortin poisto-toiminto, paranneltu koodia |
 <br/>
 
-### **Yhteensä 31 h**  
+### **Yhteensä 34.5 h**  

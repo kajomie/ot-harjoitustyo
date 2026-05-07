@@ -35,3 +35,9 @@
 - Tehty testiluokka CardRepositorylle.  
 - Kirjoitettu Docstring-kommentteja luokille.  
 - Julkaistu uusi release.  
+
+## Viikko 7  
+- Tehty korttien filtteröinti pakkojen mukaan.  
+- Tehty korttinäkymän ja pakkalistauksen automaattinen päivitys.  
+- Paranneltu käyttöliittymää mm. lisäämällä toggle-nappi vastaukselle.  
+- Tehty korttien poistaminen.  

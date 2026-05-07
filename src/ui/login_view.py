@@ -1,4 +1,4 @@
-from tkinter import StringVar, Tk, ttk, constants
+from tkinter import StringVar, Tk, ttk
 import tkinter as tk
 from application.card_service import card_service, WrongUsernameOrPassword
 from repositories.user_repository import UserRepository

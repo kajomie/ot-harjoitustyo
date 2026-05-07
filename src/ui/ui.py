@@ -1,4 +1,4 @@
-from tkinter import Tk, ttk, constants
+from tkinter import Tk, ttk
 import tkinter as tk
 from ui.login_view import LoginView
 from ui.register_view import RegisterView

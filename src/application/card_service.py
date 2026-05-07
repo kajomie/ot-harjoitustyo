@@ -123,6 +123,14 @@ class CardService:
         pakka = self._card_repository.create_deck(name, user_id)
         return pakka
 
+    def delete_card(self, card_id):
+        """Yksittäisen kortin poisto.
+
+        Args:
+            card_id (_type_): Poistettavan kortin id.
+        """
+        self._card_repository.delete_card(card_id)
+
     def get_decks(self, user):
         """Käyttäjän pakkojen palautus.
 
@@ -134,6 +142,18 @@ class CardService:
         """
         user_id = self._user.id
         lista = self._card_repository.get_decks(user_id)
+        return lista
+
+    def get_deck_cards(self, deck_id):
+        """Palauttaa tietyn pakan kortit.
+
+        Args:
+            deck_id (_type_): Pakan id.
+
+        Returns:
+            Palauttaa pakan kortit listana.
+        """
+        lista = self._card_repository.get_deck_cards(deck_id)
         return lista
 
 card_service = CardService()
