@@ -35,7 +35,7 @@ class UI:
         """
         self._hide_current_view()
 
-        self._current_view = RegisterView(self._root, self._handle_show_login, self._show_login_view)
+        self._current_view = RegisterView(self._root, self._show_login_view, self._show_login_view)
 
         self._current_view.pack()
 
@@ -44,7 +44,7 @@ class UI:
         """
         self._hide_current_view()
 
-        self._current_view = LoginView(self._root, self._handle_show_register, self._handle_show_front_page_view)
+        self._current_view = LoginView(self._root, self._show_register_view, self._show_front_page_view)
 
         self._current_view.pack()
 
@@ -53,7 +53,7 @@ class UI:
         """
         self._hide_current_view()
 
-        self._current_view = FrontPageView(self._root, self._handle_show_login, self._handle_show_card_view)
+        self._current_view = FrontPageView(self._root, self._show_login_view, self._show_card_view)
 
         self._current_view.pack()
 
@@ -62,26 +62,6 @@ class UI:
         """
         self._hide_current_view()
 
-        self._current_view = CardView(self._root, self._handle_show_front_page_view, self._handle_show_login)
+        self._current_view = CardView(self._root, self._show_front_page_view, self._show_login_view)
 
         self._current_view.pack()
-
-    def _handle_show_card_view(self):
-        """Korttinäkymän tapahtumakäsittelijä.
-        """
-        self._show_card_view()
-
-    def _handle_show_front_page_view(self):
-        """Etusivun tapahtumakäsittelijä.
-        """
-        self._show_front_page_view()
-
-    def _handle_show_login(self):
-        """Sisäänkirjautumisnäkymän tapahtumakäsittelijä.
-        """
-        self._show_login_view()
-
-    def _handle_show_register(self):
-        """Rekisteröintinäkymän tapahtumakäsittelijä.
-        """
-        self._show_register_view()

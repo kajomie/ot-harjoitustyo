@@ -58,6 +58,7 @@ class FrontPageView:
         for d in self._decks:
             if current_deck == d.name:
                 deck_id = d.id
+
         self._card_service.create_new_card(question, answer, deck_id)
         self._question_field.delete(0, 'end')
         self._answer_field.delete(0, 'end')
@@ -78,9 +79,10 @@ class FrontPageView:
         messagebox.showinfo("showinfo", "Pakka luotu onnistuneesti.")
 
     def _update_decks(self):
+        """Pakkalistan päivittäminen.
+        """
         self._decks = self._card_service.get_decks(self._user.id)
         decklist = [pakka.name for pakka in self._decks]
-        self._deck_options.set("Valitse pakka")
         self._deck_options["values"] = decklist
 
     def _initialize(self):

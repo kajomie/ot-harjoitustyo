@@ -21,6 +21,9 @@
 | 3.5 | 1.5 | Tehty UI:n automaattinen päivitys kun uusi pakka luodaan ja kortti valitaan, tehty pakan filtteröinti |
 | 5.5 | 1 | Lisätty korttinäkymään kaikkien korttien listaus, toggle-nappi vastaukselle, paranneltu korttinäkymää |
 | 6.5 | 1 | Tehty kortin poisto-toiminto, paranneltu koodia |
+| 7.5 | 0.5 | Tehty invoke build, muokattu dokumentaatiota, aloitettu kortin muokkaus |
+| 8.5 | 2 | Tehty kortin muokkaus loppuun, tehty pakkauskaavio kortin luomiselle |
+| 9.5 | 2 | Kirjoitettu testejä CardRepositorylle ja CardServicelle, päivitetty dokumentaatiota, lisätty testausdokumentti |
 <br/>
 
-### **Yhteensä 34.5 h**  
+### **Yhteensä 39.0 h**  

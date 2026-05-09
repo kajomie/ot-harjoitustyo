@@ -25,3 +25,41 @@ class TestCardRepository(unittest.TestCase):
         toinen_pakka = self.card_repository.get_decks(1)
 
         self.assertEqual(testipakka.name, toinen_pakka[0].name)
+
+    def test_get_deck_works(self):
+        testipakka = self.card_repository.create_deck("testipakka", 1)
+        testikortti = self.card_repository.create_card("moi", "jotain", 1, testipakka.id)
+        haettupakka = self.card_repository.get_deck(testikortti.id)
+
+        self.assertEqual(testipakka.id, haettupakka.id)
+
+    def test_get_decks_work(self):
+        self.card_repository.create_deck("ekapakka", 1)
+        self.card_repository.create_deck("tokapakka", 1)
+
+        haetutpakat = len(self.card_repository.get_decks(1))
+
+        self.assertEqual(haetutpakat, 2)
+
+    def test_get_deck_cards_works(self):
+        self.card_repository.create_card("ekakysymys", "ekavastaus", 1, 1)
+        self.card_repository.create_card("tokakysymys", "tokavastaus", 1, 1)
+        self.card_repository.create_card("kolmaskysymys", "kolmasvastaus", 1, 1)
+
+        haetutkortit = len(self.card_repository.get_deck_cards(1))
+
+        self.assertEqual(haetutkortit, 3)
+
+    def test_deleting_card_works(self):
+        testikortti = self.card_repository.create_card("moro", "jokuvastaus", 1, 1)
+        self.card_repository.delete_card(testikortti.id)
+        kaikkikortit = len(self.card_repository.get_cards(1))
+
+        self.assertEqual(kaikkikortit, 0)
+
+    def test_editing_card_works(self):
+        testikortti = self.card_repository.create_card("kysymys", "vastaus", 1, 1)
+        editoitu = self.card_repository.edit_card(testikortti.id, "muokattukysymys", "muokattuvastaus", 1, 1)
+
+        self.assertEqual(editoitu.question, "muokattukysymys")
+        self.assertEqual(editoitu.answer, "muokattuvastaus")

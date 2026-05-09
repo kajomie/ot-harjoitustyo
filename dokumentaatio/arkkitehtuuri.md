@@ -34,4 +34,10 @@ Uloskirjautuminen toimii samoin tapahtumakäsittelijän kautta, joka taaskin kut
 
 #### Muistikortit  
 Muistikorteilla on kaksi puolta, kysymys ja vastaus. Molemmat niistä annetaan korttia luodessa. Uudelle kortille valitaan myös sen pakka, joka tulee luoda ennen korttia. Muistikorttinäkymässä näytetään ensin kysymys, ja painiketta painamalla käyttäjä voi valita, milloin haluaa nähdä vastauksen.  
+
+![Kortin luomisen sekvenssikaavio](/dokumentaatio/kuvat/sekvenssikaavio-card.png)  
 Uutta korttia luodessa tapahtumankäsittelijä kutsuu CardServicen metodia uuden kortin luomiseen, joka edelleen ottaa yhteyttä CardRepositoryyn ja tallentaa tiedot tietokantaan. Kun kortti on luotu, niin käyttöliittymä näyttää tämän luodun kortin korttinäkymän.  
+
+### Sovelluksen heikkoudet  
+Alustavasta vaatimusmäärittelydokumentistä jäi toteuttamatta pakkojen poisto. Samoin kortin muokkaukseen olisi voinut lisätä pakan vaihdon, kun nyt siinä voi muokata vain kortin kysymystä ja vastausta.  
+Korttinäkymää CardView olisi voinut ehkä jakaa osiin tekemällä esimerkiksi erillinen EditView tai vastaava, ja sen koodia muutenkin refaktoroida paremmaksi.  

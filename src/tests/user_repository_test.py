@@ -13,3 +13,10 @@ class TestUserRepository(unittest.TestCase):
         haku = self.user_repository.search_user("kissa")
 
         self.assertEqual(haku, "kissa")
+
+    def test_check_login_works(self):
+        testikayttaja = self.user_repository.create_user("testikayttaja123", "salasana123")
+        checked_user = self.user_repository.check_login("testikayttaja123", "salasana123")
+
+        self.assertEqual(checked_user.username, testikayttaja.username)
+        self.assertEqual(checked_user.password, testikayttaja.password)

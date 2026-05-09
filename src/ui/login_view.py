@@ -1,4 +1,4 @@
-from tkinter import StringVar, Tk, ttk
+from tkinter import StringVar, Tk, ttk, messagebox
 import tkinter as tk
 from application.card_service import card_service, WrongUsernameOrPassword
 from repositories.user_repository import UserRepository
@@ -21,8 +21,6 @@ class LoginView:
         self._username_field = None
         self._password_field = None
         self._card_service = card_service
-        self._error_label = None
-        self._myvar = None
 
         self._initialize()
 
@@ -46,17 +44,7 @@ class LoginView:
             self._card_service.login(username, password)
             self._handle_logging_in()
         except WrongUsernameOrPassword:
-            self._show_error_message()
-
-    def _show_error_message(self):
-        """Virheviestin näyttäminen StringVarin avulla.
-        """
-        self._myvar.set("Väärä käyttäjätunnus tai salasana!")
-
-    def _hide_error_message(self):
-        """Virheviestin piilottaminen StringVaria päivittämällä.
-        """
-        self._myvar.set("")
+            messagebox.showerror("showerror", "Väärä käyttäjätunnus tai salasana!")
 
     def _initialize(self):
         """Kirjautumissivun alustaminen.
@@ -70,20 +58,18 @@ class LoginView:
         footer.pack(side="bottom", fill="x")
         main.pack(side="top", fill="both", expand=True)
 
-        header_title = ttk.Label(master=header, text="Kirjaudu sisään", font=("Helvetica", 22), background="#6140c6")
+        header_title = ttk.Label(master=header, text="Muistikorttisovellus", font=("Helvetica", 22), background="#6140c6")
         header_title.pack(side="left", padx=50, pady=50)
 
         header_style = ttk.Style()
         header_style.configure("header.TLabel", foreground="white")
         header_title.configure(style="header.TLabel")
-        
+
         login_frame = tk.Frame(master=main, width=500, height=500, background="#f4f4fd")
         login_frame.pack(padx=50, pady=50)
 
-        self._myvar = StringVar()
-        self._myvar.set("")
-        self._error_label = ttk.Label(master=login_frame, textvariable=self._myvar, foreground="red", background="#f4f4fd")
-        self._error_label.pack(padx=10, pady=15)
+        login_label = ttk.Label(master=login_frame, text="Kirjaudu sisään", font=("Helvetica", 20), background="#f4f4fd")
+        login_label.pack(padx=30, pady=30)
 
         username_text = ttk.Label(master=login_frame, text="Käyttäjänimi", background="#f4f4fd")
         self._username_field = ttk.Entry(master=login_frame)
@@ -98,9 +84,6 @@ class LoginView:
         password_text.pack(padx=5, pady=5)
         self._password_field.pack(padx=5, pady=5)
         login_button.pack(padx=5, pady=5)
-        
+
         register_button = ttk.Button(master=header, text="Rekisteröidy", command=self._handle_register)
         register_button.pack(side="right", padx=50)
-
-        self._hide_error_message()
-    

@@ -168,3 +168,27 @@ class CardRepository:
         cursor.execute(sql)
 
         self._connection.commit()
+
+    def edit_card(self, card_id, question, answer, user_id, deck_id):
+        """Kortin muokkaaminen.
+
+        Args:
+            card_id: Kortin id.
+            question: Kortin kysymys.
+            answer: Kortin vastaus.
+            user_id: Kortin luoneen käyttäjän id.
+            deck_id: Kortin pakan id.
+
+        Returns:
+            Palauttaa muokatun kortin oliona.
+        """
+        cursor = self._connection.cursor()
+        sql = """UPDATE cards SET question = ?, answer = ?, deck_id = ?
+        WHERE cards.id = ?
+        AND cards.user_id = ?"""
+        cursor.execute(sql, [question, answer, deck_id, card_id, user_id])
+
+        self._connection.commit()
+
+        card = Card(card_id, question, answer, user_id, deck_id)
+        return card

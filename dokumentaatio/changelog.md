@@ -39,5 +39,9 @@
 ## Viikko 7  
 - Tehty korttien filtteröinti pakkojen mukaan.  
 - Tehty korttinäkymän ja pakkalistauksen automaattinen päivitys.  
-- Paranneltu käyttöliittymää mm. lisäämällä toggle-nappi vastaukselle.  
-- Tehty korttien poistaminen.  
+- Paranneltu käyttöliittymää mm. lisäämällä toggle-nappi vastaukselle sekä messagebox-viestit.  
+- Käyttäjä voi poistaa tekemiänsä kortteja.  
+- Käyttäjä voi muokata tekemiään kortteja.  
+- Lisätty arkkitehtuuri.md:hen kortin luomisen sekvenssikaavio.  
+- Tehty testejä CardServicelle ja CardRepositorylle.  
+- Lisätty testausdokumentti.  

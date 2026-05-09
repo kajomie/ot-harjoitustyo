@@ -1,6 +1,6 @@
-from tkinter import StringVar, Tk, ttk
+from tkinter import StringVar, Tk, ttk, messagebox
 import tkinter as tk
-from application.card_service import card_service, UsernameAlreadyInUse, EmptyNameOrPasswordField
+from application.card_service import card_service, UsernameAlreadyInUse, EmptyField
 from repositories.user_repository import UserRepository
 
 class RegisterView:
@@ -21,8 +21,6 @@ class RegisterView:
         self._username_field = None
         self._password_field = None
         self._card_service = card_service
-        self._error_label = None
-        self._myvar = None
 
         self._initialize()
 
@@ -43,27 +41,14 @@ class RegisterView:
         password = self._password_field.get()
 
         if not username or not password:
-            self._show_error_message("Käyttäjätunnus ja salasana eivät saa olla tyhjiä!")
+            messagebox.showerror("showerror", "Käyttäjätunnus ja salasana eivät saa olla tyhjiä!")
             return
 
         try:
             self._card_service.create_new_user(username, password)
             self._handle_create_new_user()
         except UsernameAlreadyInUse:
-            self._show_error_message("Käyttäjätunnus on jo varattu!")
-
-    def _show_error_message(self, message):
-        """Virheviestin näyttö.
-
-        Args:
-            message: Virheviesti parametrina, joka näytetään käyttäjälle.
-        """
-        self._myvar.set(message)
-
-    def _hide_error_message(self):
-        """Virheviestin piilotus StringVar tyhjentämällä.
-        """
-        self._myvar.set("")
+            messagebox.showerror("showerror", "Käyttäjätunnus on jo varattu!")
 
     def _initialize(self):
         """Rekisteröintisivun alustus.
@@ -77,7 +62,7 @@ class RegisterView:
         footer.pack(side="bottom", fill="x")
         main.pack(side="top", fill="both", expand=True)
 
-        header_title = ttk.Label(master=header, text="Rekisteröidy", font=("Helvetica", 22), background="#6140c6")
+        header_title = ttk.Label(master=header, text="Muistikorttisovellus", font=("Helvetica", 22), background="#6140c6")
         header_title.pack(side="left", padx=50, pady=50)
 
         header_style = ttk.Style()
@@ -87,10 +72,8 @@ class RegisterView:
         register_frame = tk.Frame(master=main, width=500, height=500, background="#f4f4fd")
         register_frame.pack(padx=50, pady=50)
 
-        self._myvar = StringVar()
-        self._myvar.set("")
-        self._error_label = ttk.Label(master=register_frame, textvariable=self._myvar, foreground="red", background="#f4f4fd")
-        self._error_label.pack(padx=10, pady=15)
+        register_label = ttk.Label(master=register_frame, text="Rekisteröidy", font=("Helvetica", 20), background="#f4f4fd")
+        register_label.pack(padx=30, pady=30)
 
         username_text = ttk.Label(master=register_frame, text="Käyttäjänimi", background="#f4f4fd")
         self._username_field = ttk.Entry(master=register_frame)
@@ -98,20 +81,13 @@ class RegisterView:
         password_text = ttk.Label(master=register_frame, text="Salasana", background="#f4f4fd")
         self._password_field = ttk.Entry(master=register_frame, show="*")
 
-        confirm_password_text = ttk.Label(master=register_frame, text="Salasana uudestaan", background="#f4f4fd")
-        confirm_password_field = ttk.Entry(master=register_frame, show="*")
-
         register_new_user_button = ttk.Button(master=register_frame, text="Luo tunnus", command=self._create_new_user_handler)
 
         username_text.pack(padx=5, pady=5)
         self._username_field.pack(padx=5, pady=5)
         password_text.pack(padx=5, pady=5)
         self._password_field.pack(padx=5, pady=5)
-        confirm_password_text.pack(padx=5, pady=5)
-        confirm_password_field.pack(padx=5, pady=5)
         register_new_user_button.pack(padx=5, pady=5)
         
         login_user_button = ttk.Button(master=header, text="Kirjaudu sisään", command=self._handle_show_login)
         login_user_button.pack(side="right", padx=50)
-
-        self._hide_error_message()

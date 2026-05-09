@@ -8,21 +8,23 @@ class WrongUsernameOrPassword(Exception):
 class UsernameAlreadyInUse(Exception):
     pass
 
-class EmptyNameOrPasswordField(Exception):
+class EmptyField(Exception):
     pass
 
 class CardService:
     """Sovelluslogiikkaa hoitava luokka.
     """
-    def __init__(self, user_repository=None):
+    def __init__(self, user_repository=None, card_repository=None):
         """CardService-luokan konstruktori.
 
         Args:
             user_repository: Käyttäjärepositorio. Jos olio ei ole jo olemassa niin se luodaan.
         """
         self._user = None
-        self._user_repository = user_repository if user_repository else UserRepository(get_database_connection())
-        self._card_repository = CardRepository(get_database_connection())
+        self._user_repository = user_repository if user_repository \
+            else UserRepository(get_database_connection())
+        self._card_repository = card_repository if card_repository \
+            else CardRepository(get_database_connection())
 
     def create_new_user(self, username, password):
         """Uuden käyttäjän luonti.
@@ -32,14 +34,14 @@ class CardService:
             password: Salasana.
 
         Raises:
-            EmptyNameOrPasswordField: Virhe, joka tulee jos käyttäjänimi tai salasana ovat tyhjiä.
+            EmptyField: Virhe, joka tulee jos käyttäjänimi tai salasana ovat tyhjiä.
             UsernameAlreadyInUse: Virhe, joka tulee jos käyttäjänimi on jo käytössä.
 
         Returns:
             Palauttaa juuri luodun käyttäjän oliona.
         """
         if not username or not password:
-            raise EmptyNameOrPasswordField("Käyttäjätunnus tai salasana eivät saa olla tyhjiä!")
+            raise EmptyField("Käyttäjätunnus tai salasana eivät saa olla tyhjiä!")
 
         username_available = self._user_repository.search_user(username)
         if username_available:
@@ -94,6 +96,9 @@ class CardService:
         Returns:
             Palauttaa juuri luodun kortin oliona.
         """
+        if not question or not answer or not deck_id:
+            raise EmptyField("Kortin kysymys, vastaus tai pakka eivät saa olla tyhjiä!")
+
         user_id = self._user.id
         return self._card_repository.create_card(question, answer, user_id, deck_id)
 
@@ -107,8 +112,8 @@ class CardService:
             Palauttaa listan käyttäjän korteista.
         """
         user_id = self._user.id
-        lista = self._card_repository.get_cards(user_id)
-        return lista
+        cardlist = self._card_repository.get_cards(user_id)
+        return cardlist
 
     def create_new_deck(self, name):
         """Uuden pakan luonti.
@@ -119,9 +124,12 @@ class CardService:
         Returns:
             Palauttaa juuri luodun pakan oliona.
         """
+        if not name:
+            raise EmptyField("Pakan nimi ei saa olla tyhjä!")
+
         user_id = self._user.id
-        pakka = self._card_repository.create_deck(name, user_id)
-        return pakka
+        deck = self._card_repository.create_deck(name, user_id)
+        return deck
 
     def delete_card(self, card_id):
         """Yksittäisen kortin poisto.
@@ -141,8 +149,8 @@ class CardService:
             Palauttaa listan käyttäjän pakoista.
         """
         user_id = self._user.id
-        lista = self._card_repository.get_decks(user_id)
-        return lista
+        decklist = self._card_repository.get_decks(user_id)
+        return decklist
 
     def get_deck_cards(self, deck_id):
         """Palauttaa tietyn pakan kortit.
@@ -153,7 +161,23 @@ class CardService:
         Returns:
             Palauttaa pakan kortit listana.
         """
-        lista = self._card_repository.get_deck_cards(deck_id)
-        return lista
+        decklist = self._card_repository.get_deck_cards(deck_id)
+        return decklist
+
+    def edit_card(self, card_id, question, answer, user_id, deck_id):
+        """Kortin muokkaus.
+
+        Args:
+            card_id: Muokattavan kortin id.
+            question: Kortin kysymys.
+            answer: Kortin vastaus.
+            user_id: Kortin luoneen käyttäjän id.
+            deck_id: Kortin pakan id.
+        """
+        if not question or not answer or not deck_id:
+            raise EmptyField("Kortin kysymys, vastaus tai pakka eivät saa olla tyhjiä!")
+
+        edited_card = self._card_repository.edit_card(card_id, question, answer, user_id, deck_id)
+        return edited_card
 
 card_service = CardService()
