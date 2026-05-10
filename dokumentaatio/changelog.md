@@ -42,6 +42,6 @@
 - Paranneltu käyttöliittymää mm. lisäämällä toggle-nappi vastaukselle sekä messagebox-viestit.  
 - Käyttäjä voi poistaa tekemiänsä kortteja.  
 - Käyttäjä voi muokata tekemiään kortteja.  
-- Lisätty arkkitehtuuri.md:hen kortin luomisen sekvenssikaavio.  
+- Lisätty arkkitehtuuri.md:hen rekisteröitymisen sekä kortin luomisen, poiston ja muokkauksen sekvenssikaaviot.  
 - Tehty testejä CardServicelle ja CardRepositorylle.  
 - Kirjoitettu testausdokumentti, ja viimeistelty muut dokumentaatiot kuten arkkitehtuuri.md ja ohje.md.  

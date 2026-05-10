@@ -24,7 +24,7 @@
 | 7.5 | 0.5 | Tehty invoke build, muokattu dokumentaatiota, aloitettu kortin muokkaus |
 | 8.5 | 2 | Tehty kortin muokkaus loppuun, tehty pakkauskaavio kortin luomiselle |
 | 9.5 | 2 | Kirjoitettu testejä CardRepositorylle ja CardServicelle, päivitetty dokumentaatiota, lisätty testausdokumentti |
-| 10.5 | 1 | Kirjoitettu testaus.md, refaktoroitu koodia, viimeistelty ja kirjoitettu dokumentaatiota |
+| 10.5 | 2 | Kirjoitettu testaus.md, refaktoroitu koodia, viimeistelty ja kirjoitettu dokumentaatiota, tehty kaavioita |
 <br/>
 
-### **Yhteensä 40.0 h**  
+### **Yhteensä 41.0 h**  
