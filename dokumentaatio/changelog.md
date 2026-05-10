@@ -45,3 +45,4 @@
 - Lisätty arkkitehtuuri.md:hen rekisteröitymisen sekä kortin luomisen, poiston ja muokkauksen sekvenssikaaviot.  
 - Tehty testejä CardServicelle ja CardRepositorylle.  
 - Kirjoitettu testausdokumentti, ja viimeistelty muut dokumentaatiot kuten arkkitehtuuri.md ja ohje.md.  
+- Julkaistu loppupalautuksen release.  
