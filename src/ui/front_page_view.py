@@ -1,4 +1,4 @@
-from tkinter import Tk, ttk, StringVar, messagebox
+from tkinter import Tk, ttk, messagebox
 import tkinter as tk
 from application.card_service import card_service
 
@@ -137,19 +137,19 @@ class FrontPageView:
         self._deck_options.pack(padx=5, pady=5)
 
         create_card_button = ttk.Button(master=create_card_frame, text="Luo uusi muistikortti", command=self._create_card_handler)
-        create_card_button.pack(padx=50, pady=50)
+        create_card_button.pack(padx=35, pady=20)
 
         card_view_button = ttk.Button(master=right_page_frame, text="Selaa kortteja", command=self._handle_card_view)
         card_view_button.pack(padx=50, pady=50)
 
-        create_deck_frame = tk.Frame(master=left_page_frame, width=400, height=400, background="#9999ed")
-        create_deck_frame.pack(padx=20, pady=20)
+        create_deck_frame = tk.Frame(master=left_page_frame, width=300, height=300, background="#9999ed")
+        create_deck_frame.pack(padx=20, pady=10)
         create_deck_label = ttk.Label(master=create_deck_frame, text="Luo uusi pakka", font=("Helvetica", 16), background="#9999ed", style="header.TLabel")
         create_deck_label.pack(side="top", padx=20, pady=20)
         deck_label = ttk.Label(master=create_deck_frame, text="Pakan nimi:", background="#9999ed", style="header.TLabel")
         self._deck_name_field = ttk.Entry(master=create_deck_frame)
         deck_label.pack(padx=5, pady=5)
-        self._deck_name_field.pack(padx=40, pady=10)
+        self._deck_name_field.pack(padx=20, pady=10)
 
         create_deck_button = ttk.Button(master=create_deck_frame, text="Luo uusi pakka", command=self._create_deck_handler)
         create_deck_button.pack(padx=5, pady=20)

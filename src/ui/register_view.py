@@ -1,4 +1,4 @@
-from tkinter import StringVar, Tk, ttk, messagebox
+from tkinter import Tk, ttk, messagebox
 import tkinter as tk
 from application.card_service import card_service, UsernameAlreadyInUse, EmptyField
 from repositories.user_repository import UserRepository

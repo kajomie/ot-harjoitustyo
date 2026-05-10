@@ -48,14 +48,14 @@ class CardRepository:
         sql = "SELECT * FROM cards WHERE cards.user_id = ?"
         cursor.execute(sql, [user_id])
         result = cursor.fetchall()
-        lista = []
+        cardlist = []
 
         if result:
             for c in result:
                 card = Card(c[0], c[1], c[2], c[3], c[4])
-                lista.append(card)
+                cardlist.append(card)
 
-        return lista
+        return cardlist
 
     def create_deck(self, name, user_id):
         """Uuden pakan luonti.
@@ -91,14 +91,14 @@ class CardRepository:
         sql = "SELECT * FROM decks WHERE decks.user_id = ?"
         cursor.execute(sql, [user_id])
         result = cursor.fetchall()
-        lista = []
+        decklist = []
 
         if result:
             for c in result:
                 deck = Deck(c[0], c[1], c[2])
-                lista.append(deck)
+                decklist.append(deck)
 
-        return lista
+        return decklist
 
     def get_deck(self, card_id):
         """Kortin pakan palautus.
@@ -133,14 +133,14 @@ class CardRepository:
         sql = "SELECT * FROM cards WHERE cards.deck_id = ?"
         cursor.execute(sql, [deck_id])
         result = cursor.fetchall()
-        lista = []
+        cardlist = []
 
         if result:
             for c in result:
                 card = Card(c[0], c[1], c[2], c[3], c[4])
-                lista.append(card)
+                cardlist.append(card)
 
-        return lista
+        return cardlist
 
     def delete_card(self, card_id):
         """Yksittäisen kortin poisto.

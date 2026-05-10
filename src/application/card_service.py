@@ -135,7 +135,7 @@ class CardService:
         """Yksittäisen kortin poisto.
 
         Args:
-            card_id (_type_): Poistettavan kortin id.
+            card_id: Poistettavan kortin id.
         """
         self._card_repository.delete_card(card_id)
 
@@ -156,7 +156,7 @@ class CardService:
         """Palauttaa tietyn pakan kortit.
 
         Args:
-            deck_id (_type_): Pakan id.
+            deck_id: Pakan id.
 
         Returns:
             Palauttaa pakan kortit listana.
@@ -173,6 +173,12 @@ class CardService:
             answer: Kortin vastaus.
             user_id: Kortin luoneen käyttäjän id.
             deck_id: Kortin pakan id.
+
+        Raises:
+            EmptyField: Virhe, joka nostetaan jos kysymys tai vastaus ovat tyhjiä.
+
+        Returns:
+            Palauttaa muokatun kortin oliona.
         """
         if not question or not answer or not deck_id:
             raise EmptyField("Kortin kysymys, vastaus tai pakka eivät saa olla tyhjiä!")

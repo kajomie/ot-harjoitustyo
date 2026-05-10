@@ -44,4 +44,4 @@
 - Käyttäjä voi muokata tekemiään kortteja.  
 - Lisätty arkkitehtuuri.md:hen kortin luomisen sekvenssikaavio.  
 - Tehty testejä CardServicelle ja CardRepositorylle.  
-- Lisätty testausdokumentti.  
+- Kirjoitettu testausdokumentti, ja viimeistelty muut dokumentaatiot kuten arkkitehtuuri.md ja ohje.md.  

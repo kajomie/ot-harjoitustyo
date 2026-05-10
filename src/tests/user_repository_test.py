@@ -9,14 +9,14 @@ class TestUserRepository(unittest.TestCase):
         self.user_repository.delete_all_users()
 
     def test_creating_user_works(self):
-        testikayttaja = self.user_repository.create_user("kissa", "salasana")
-        haku = self.user_repository.search_user("kissa")
+        newuser = self.user_repository.create_user("kissa", "salasana")
+        searched_user = self.user_repository.search_user("kissa")
 
-        self.assertEqual(haku, "kissa")
+        self.assertEqual(searched_user, "kissa")
 
     def test_check_login_works(self):
-        testikayttaja = self.user_repository.create_user("testikayttaja123", "salasana123")
+        newuser = self.user_repository.create_user("testikayttaja123", "salasana123")
         checked_user = self.user_repository.check_login("testikayttaja123", "salasana123")
 
-        self.assertEqual(checked_user.username, testikayttaja.username)
-        self.assertEqual(checked_user.password, testikayttaja.password)
+        self.assertEqual(checked_user.username, newuser.username)
+        self.assertEqual(checked_user.password, newuser.password)

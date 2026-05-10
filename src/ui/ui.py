@@ -1,5 +1,3 @@
-from tkinter import Tk, ttk
-import tkinter as tk
 from ui.login_view import LoginView
 from ui.register_view import RegisterView
 from ui.front_page_view import FrontPageView

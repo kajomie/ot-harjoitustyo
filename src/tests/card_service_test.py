@@ -97,22 +97,26 @@ class CardRepositoryStub:
 class TestCardService(unittest.TestCase):
     def setUp(self):
         self.card_service = CardService(UserRepositoryStub(), CardRepositoryStub())
+        self.fake_user = User(1, "testikayttaja123", "testisalasana123")
+
+    def login_fake_user(self, user):
+        self.card_service.create_new_user(user.username, user.password)
+        self.card_service.login(user.username, user.password)
 
     def test_create_user_works(self):
-        kayttaja = self.card_service.create_new_user("testikayttaja", "salasana123")
-        self.assertEqual("testikayttaja", kayttaja.username)
+        newuser = self.card_service.create_new_user("testikayttaja", "salasana123")
+        self.assertEqual("testikayttaja", newuser.username)
 
     def test_login_works(self):
         self.card_service.create_new_user("jokukayttaja", "testisalasana")
-        testikayttaja = self.card_service.login("jokukayttaja", "testisalasana")
-        self.assertEqual("jokukayttaja", testikayttaja.username)
-        self.assertEqual("testisalasana", testikayttaja.password)
+        newuser = self.card_service.login("jokukayttaja", "testisalasana")
+        self.assertEqual("jokukayttaja", newuser.username)
+        self.assertEqual("testisalasana", newuser.password)
 
     def test_get_user_works(self):
-        self.card_service.create_new_user("joku", "jotain")
-        self.card_service.login("joku", "jotain")
-        kayttaja = self.card_service.get_user()
-        self.assertEqual("joku", kayttaja.username)
+        self.login_fake_user(self.fake_user)
+        newuser = self.card_service.get_user()
+        self.assertEqual("testikayttaja123", newuser.username)
 
     def test_login_with_wrong_username_raises_error(self):
         self.assertRaises(WrongUsernameOrPassword, lambda: self.card_service.login("jokunimi", "jokusalasana"))
@@ -121,8 +125,8 @@ class TestCardService(unittest.TestCase):
         self.card_service.create_new_user("ihansama", "ihansama")
         self.card_service.login("ihansama", "ihansama")
         self.card_service.logout()
-        kayttaja = self.card_service.get_user()
-        self.assertEqual(None, kayttaja)
+        newuser = self.card_service.get_user()
+        self.assertEqual(None, newuser)
 
     def test_username_already_used_raises_error(self):
         self.card_service.create_new_user("jokuvaan", "jokuvaan")
@@ -138,27 +142,22 @@ class TestCardService(unittest.TestCase):
         self.assertRaises(EmptyField, lambda: self.card_service.create_new_deck(""))
 
     def test_create_new_card_works(self):
-        self.card_service.create_new_user("testikayttaja456", "jokusalasana")
-        self.card_service.login("testikayttaja456", "jokusalasana")
-        user = self.card_service.get_user()
+        self.login_fake_user(self.fake_user)
 
         deck = self.card_service.create_new_deck("testipakka")
         self.card_service.create_new_card("jokukysymys", "jokuvastaus", deck.id)
-        searched_cards = len(self.card_service.get_cards(user.id))
+        searched_cards = len(self.card_service.get_cards(self.fake_user.id))
         self.assertEqual(searched_cards, 1)
 
     def test_create_new_deck_works(self):
-        self.card_service.create_new_user("testikayttaja123", "jotainvaan")
-        self.card_service.login("testikayttaja123", "jotainvaan")
-        user = self.card_service.get_user()
+        self.login_fake_user(self.fake_user)
 
         self.card_service.create_new_deck("jokupakka")
-        searched_decks = len(self.card_service.get_decks(user.id))
+        searched_decks = len(self.card_service.get_decks(self.fake_user.id))
         self.assertEqual(searched_decks, 1)
     
     def test_get_deck_cards_works(self):
-        self.card_service.create_new_user("testikayttaja123", "jotainvaan")
-        self.card_service.login("testikayttaja123", "jotainvaan")
+        self.login_fake_user(self.fake_user)
 
         deck = self.card_service.create_new_deck("jokupakka")
         self.card_service.create_new_card("jokukysymys", "jokuvastaus", deck.id)
@@ -167,37 +166,31 @@ class TestCardService(unittest.TestCase):
         self.assertEqual(deck_cards, 2)
 
     def test_delete_card_works(self):
-        self.card_service.create_new_user("testikayttaja456", "jokusalasana")
-        self.card_service.login("testikayttaja456", "jokusalasana")
-        user = self.card_service.get_user()
+        self.login_fake_user(self.fake_user)
 
         deck = self.card_service.create_new_deck("testipakka")
         new_card = self.card_service.create_new_card("jokukysymys", "jokuvastaus", deck.id)
-        searched_cards = len(self.card_service.get_cards(user.id))
+        searched_cards = len(self.card_service.get_cards(self.fake_user.id))
         self.assertEqual(searched_cards, 1)
 
         self.card_service.delete_card(new_card.id)
-        cards_after_delete = len(self.card_service.get_cards(user.id))
+        cards_after_delete = len(self.card_service.get_cards(self.fake_user.id))
         self.assertEqual(cards_after_delete, 0)
 
     def test_edit_card_works(self):
-        self.card_service.create_new_user("testikayttaja456", "jokusalasana")
-        self.card_service.login("testikayttaja456", "jokusalasana")
-        user = self.card_service.get_user()
+        self.login_fake_user(self.fake_user)
 
         deck = self.card_service.create_new_deck("testipakka")
         new_card = self.card_service.create_new_card("jokukysymys", "jokuvastaus", deck.id)
 
-        edited_card = self.card_service.edit_card(new_card.id, "muokattu kysymys", "muokattu vastaus", user.id, deck.id)
+        edited_card = self.card_service.edit_card(new_card.id, "muokattu kysymys", "muokattu vastaus", self.fake_user.id, deck.id)
         self.assertEqual(edited_card.question, "muokattu kysymys")
         self.assertEqual(edited_card.answer, "muokattu vastaus")
 
     def test_editing_cards_with_empty_fields_raises_error(self):
-        self.card_service.create_new_user("testikayttaja456", "jokusalasana")
-        self.card_service.login("testikayttaja456", "jokusalasana")
-        user = self.card_service.get_user()
+        self.login_fake_user(self.fake_user)
 
         deck = self.card_service.create_new_deck("testipakka")
         new_card = self.card_service.create_new_card("jokukysymys", "jokuvastaus", deck.id)
 
-        self.assertRaises(EmptyField, lambda: self.card_service.edit_card(new_card.id, "", "", "", user.id))
+        self.assertRaises(EmptyField, lambda: self.card_service.edit_card(new_card.id, "", "", "", self.fake_user.id))

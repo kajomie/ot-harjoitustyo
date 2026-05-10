@@ -1,6 +1,12 @@
 from database_connection import get_database_connection
 
 def delete_tables(connection):
+    """Tietokannan tyhjennys, joka poistaa kaikki taulut.
+
+    Args:
+        connection: Tietokantayhteys.
+    """
+
     cursor = connection.cursor()
 
     sql = "DROP TABLE IF EXISTS users;"
@@ -12,6 +18,12 @@ def delete_tables(connection):
     connection.commit()
 
 def create_tables(connection):
+    """Tietokannan taulujen luonti.
+
+    Args:
+        connection: Tietokantayhteys.
+    """
+
     cursor = connection.cursor()
 
     sql = "CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT);"
@@ -36,6 +48,8 @@ def create_tables(connection):
     connection.commit()
 
 def initialize_database():
+    """Tietokannan alustaminen.
+    """
     connection = get_database_connection()
     delete_tables(connection)
     create_tables(connection)
